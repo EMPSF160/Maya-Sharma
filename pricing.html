@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Book [Author Name] for school visits, storytelling workshops, and keynote speaking. View pricing packages and availability.">
+    <title>School Visits & Speaking | Booking [Author Name]</title>
+    <link rel="icon" href="assets/images/author.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .pricing-card {
+            background: var(--bg-white);
+            padding: 3.5rem 2.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--primary);
+            box-shadow: var(--shadow-lg);
+            transform: scale(1.05);
+        }
+
+        .popular-badge {
+            background: var(--primary);
+            color: white;
+            padding: 0.4rem 1.5rem;
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            transform: rotate(45deg);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-family: 'Fredoka';
+            color: var(--text-main);
+            margin: 1.5rem 0;
+            font-weight: 700;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            font-family: 'Inter';
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .pricing-features i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .faq-section {
+            background: var(--bg-paper);
+            padding: 3rem 0 6rem;
+        }
+
+        .faq-accordion {
+            max-width: 850px;
+            margin: 3rem auto 0;
+        }
+
+        .faq-item {
+            background: var(--bg-white);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+            list-style: none;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-header {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            outline: none;
+        }
+
+        .faq-header::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-header h4 {
+            margin: 0;
+            color: var(--text-main);
+            font-size: 1.1rem;
+        }
+
+        .faq-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(108, 92, 231, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        details[open] .faq-icon {
+            background: var(--primary);
+            color: white;
+            transform: rotate(45deg);
+        }
+
+        .faq-content {
+            padding: 0 2rem 1.8rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+
+
+        .booking-steps-section {
+            padding: 8rem 0;
+            background: var(--bg-light);
+            text-align: center;
+        }
+
+        .booking-steps {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 5rem;
+            position: relative;
+        }
+
+        .booking-steps::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 15%;
+            right: 15%;
+            height: 2px;
+            border-top: 3px dashed var(--border);
+            z-index: 0;
+        }
+
+        .step-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            width: 320px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            transform: scale(0.8) translateY(30px);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid var(--border);
+        }
+
+        .step-card.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: -70px auto 1.5rem;
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .step-card:hover .step-icon {
+            transform: rotateY(180deg) scale(1.15);
+        }
+
+        .step-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 1024px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.popular {
+                transform: none;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+
+            .booking-steps {
+                flex-direction: column;
+                align-items: center;
+                gap: 6rem;
+            }
+
+            .booking-steps::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="pricing-page">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-blob"></div>
+    </div>
+
+    <!-- Shared Header Placeholder -->
+    <nav class="navbar"></nav>
+
+    <!-- Pricing Hero -->
+    <header class="section-padding text-center pricing-header">
+        <div class="container reveal">
+            <span class="book-tag" style="margin-bottom: 1.5rem;">Bring Magic to Your School</span>
+            <h1 style="margin-bottom: 1.5rem;">Visits & Workshops</h1>
+            <p style="max-width: 700px; margin: 0 auto; margin-bottom: 2rem;">Sharing stories, teaching creativity, and
+                inspiring the next
+                generation of authors. Choose a package that fits your educational needs.</p>
+        </div>
+    </header>
+
+    <!-- Pricing Cards -->
+    <section class="section-padding container">
+        <div class="pricing-grid">
+            <!-- Package 1 -->
+            <div class="pricing-card reveal">
+                <h3>VIRTUAL VISIT</h3>
+                <div class="price">$250 <span>/ Session</span></div>
+                <p>Perfect for remote learning or schools outside our travel zone.</p>
+                <ul class="pricing-features">
+                    <li><i class="ri-checkbox-circle-fill"></i> 45-min Zoom Q&A session</li>
+                    <li><i class="ri-checkbox-circle-fill"></i> Live reading of one book</li>
+                    <li><i class="ri-checkbox-circle-fill"></i> Digital activity pack</li>
+                    <li><i class="ri-close-circle-line" style="color: var(--text-muted); opacity: 0.3;"></i> Physical
+                        book signing
+                    </li>
+                </ul>
+                <a href="contact.html" class="btn btn-outline" style="width: 100%;">Enquire Now</a>
+            </div>
+
+            <!-- Package 2 -->
+            <div class="pricing-card popular reveal" style="transition-delay: 0.2s;">
+                <div class="popular-badge">MOST POPULAR</div>
+                <h3>SCHOOL DAY</h3>
+                <div class="price">$850 <span>/ Full Day</span></div>
+                <p>A full immersive experience for the entire school population.</p>
+                <ul class="pricing-features">
+                    <li><i class="ri-checkbox-circle-fill"></i> 3 Separate assemblies</li>
+                    <li><i class="ri-checkbox-circle-fill"></i> Small group workshops</li>
+                    <li><i class="ri-checkbox-circle-fill"></i> Staff room meet-and-greet</li>
+                    <li><i class="ri-checkbox-circle-fill"></i> signed book for the library</li>
+                </ul>
+                <a href="contact.html" class="btn btn-primary" style="width: 100%;">Book the Date</a>
+            </div>
+
+            <!-- Package 3 -->
+            <div class="pricing-card reveal" style="transition-delay: 0.4s;">
+                <h3>KEYNOTE</h3>
+                <div class="price">$1500+ <span>/ Event</span></div>
+                <p>Inspiring educators and parents at conferences and festivals.</p>
+                <ul class="pricing-features">
+                    <li><i class="ri-checkbox-circle-fill"></i> 60-min Keynote speech</li>
+                    <li><i class="ri-checkbox-circle-fill"></i> Custom storytelling theory</li>
+                    <li><i class="ri-checkbox-circle-fill"></i> Workshop for adults</li>
+                    <li><i class="ri-checkbox-circle-fill"></i> Strategic book placement</li>
+                </ul>
+                <a href="contact.html" class="btn btn-outline" style="width: 100%;">Contact Agent</a>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ADDITIONAL SECTION 2: How to Book -->
+    <section class="booking-steps-section">
+        <div class="container">
+            <div class="reveal">
+                <h2 style="margin-bottom: 1rem; color: var(--text-main);">From Inquiry to Inspiration
+                </h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Bringing magic to your school is
+                    easier than you think. Follow these three simple steps to secure your date.</p>
+            </div>
+
+            <div class="booking-steps">
+                <div class="step-card reveal" style="transition-delay: 0.1s;">
+                    <div class="step-icon"><i class="ri-mail-send-line"></i></div>
+                    <h3 style="color: var(--text-main); margin-bottom: 1rem;">1. Inquire</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Fill out the contact form with your
+                        preferred dates, school size, and chosen package.</p>
+                </div>
+
+                <div class="step-card reveal" style="transition-delay: 0.3s;">
+                    <div class="step-icon" style="background: var(--accent);"><i class="ri-calendar-check-line"></i>
+                    </div>
+                    <h3 style="color: var(--text-main); margin-bottom: 1rem;">2. Plan</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">We'll iron out the details, send you
+                        pre-order forms for parents, and provide digital activity sheets.</p>
+                </div>
+
+                <div class="step-card reveal" style="transition-delay: 0.5s;">
+                    <div class="step-icon" style="background: var(--secondary);"><i class="ri-rocket-2-line"></i></div>
+                    <h3 style="color: var(--text-main); margin-bottom: 1rem;">3. Present</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">The day arrives! I show up, make the kids
+                        laugh, sign some books, and leave them feeling inspired.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="text-center mb-3 reveal">Common Questions</h2>
+            <div class="faq-accordion reveal">
+                <!-- FAQ 1 -->
+                <details class="faq-item">
+                    <summary class="faq-header">
+                        <h4>Do you travel internationally?</h4>
+                        <span class="faq-icon"><i class="ri-add-line"></i></span>
+                    </summary>
+                    <div class="faq-content">
+                        <p>Yes! While I am based in Storyville, I love traveling to meet readers abroad. Travel and
+                            accommodation fees apply for locations outside a 50-mile radius.</p>
+                    </div>
+                </details>
+
+                <!-- FAQ 2 -->
+                <details class="faq-item">
+                    <summary class="faq-header">
+                        <h4>What age groups do you present to?</h4>
+                        <span class="faq-icon"><i class="ri-add-line"></i></span>
+                    </summary>
+                    <div class="faq-content">
+                        <p>I have tailored sessions for Early Years (Pre-K) all the way up to Middle School (Grades
+                            6-8).
+                            My keynote speeches are designed for adults/educators.</p>
+                    </div>
+                </details>
+
+                <!-- FAQ 3 -->
+                <details class="faq-item">
+                    <summary class="faq-header">
+                        <h4>Are books available for pre-order?</h4>
+                        <span class="faq-icon"><i class="ri-add-line"></i></span>
+                    </summary>
+                    <div class="faq-content">
+                        <p>Absolutely. We provide a pre-order form for schools to distribute to parents two weeks before
+                            the visit to ensure every child gets their signed copy.</p>
+                    </div>
+                </details>
+
+                <!-- FAQ 4 -->
+                <details class="faq-item">
+                    <summary class="faq-header">
+                        <h4>Can we record the session?</h4>
+                        <span class="faq-icon"><i class="ri-add-line"></i></span>
+                    </summary>
+                    <div class="faq-content">
+                        <p>Virtual visits may be recorded for internal school use only. Recording of physical assemblies
+                            is
+                            permitted with prior written consent.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shared Footer Placeholder -->
+    <footer></footer>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

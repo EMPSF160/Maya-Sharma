@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Exciting things are coming! Stay tuned for more stories, more magic, and more adventures from [Author Name].">
+    <title>Something Magical is Brewing | Coming Soon</title>
+    <link rel="icon" href="assets/images/author.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .coming-soon-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at top right, var(--secondary), transparent 40%), radial-gradient(circle at bottom left, var(--primary), transparent 40%);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+        }
+
+        .countdown-item {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--glass-border);
+            min-width: 120px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .countdown-value {
+            font-size: 3rem;
+            font-family: 'Fredoka';
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .signup-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-white);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+        }
+
+        @media (max-width: 640px) {
+            .countdown {
+                gap: 1rem;
+            }
+
+            .countdown-item {
+                padding: 1rem;
+                min-width: 80px;
+            }
+
+            .countdown-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body data-theme="light">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-blob"></div>
+    </div>
+
+    <!-- Coming Soon Layout -->
+    <section class="coming-soon-container">
+        <!-- Floating Elements -->
+        <div class="floating-element" style="top: 10%; left: 5%;"><i class="ri-palette-line"
+                style="font-size: 4rem; color: var(--accent); opacity: 0.1;"></i></div>
+        <div class="floating-element" style="bottom: 15%; right: 10%; animation-delay: 2.5s;"><i class="ri-magic-line"
+                style="font-size: 6rem; color: var(--primary); opacity: 0.1;"></i></div>
+
+        <div class="reveal">
+            <a href="index.html" class="logo mb-2"
+                style="font-size: 2.5rem; justify-content: center;">Story<span>Tail</span></a>
+            <h1 class="mb-1">Something <span>New</span> is Writing...</h1>
+            <p class="mb-4" style="max-width: 600px; margin: 0 auto;">Our next big adventure is currently being
+                illustrated. We'll be launching in:</p>
+
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-value" id="days">30</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="hours">23</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="mins">59</span>
+                    <span class="countdown-label">Mins</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="secs">59</span>
+                    <span class="countdown-label">Secs</span>
+                </div>
+            </div>
+
+            <div class="signup-form reveal" style="transition-delay: 0.4s;">
+                <h3 class="mb-1">Be the first to hear about it!</h3>
+                <p class="mb-2" style="color: var(--text-muted);">Get an exclusive early-bird copy signed by [Author
+                    Name] by joining our waitlist.</p>
+
+                <form action="#" method="POST" class="flex-gap-sm justify-center">
+                    <input type="email" placeholder="Your email address" class="form-control"
+                        style="width: 300px; max-width: 100%; border-radius: var(--radius-full);" required>
+                    <button type="submit" class="btn btn-primary">Join Waitlist <i
+                            class="ri-send-plane-fill"></i></button>
+                </form>
+            </div>
+
+            <div class="social-links mt-3 justify-center">
+                <a href="#" class="social-icon"><i class="ri-instagram-line"></i></a>
+                <a href="#" class="social-icon"><i class="ri-facebook-fill"></i></a>
+                <a href="#" class="social-icon"><i class="ri-twitter-fill"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

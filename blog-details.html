@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Discover how we sketched the Backyard Jungle. Behind-the-scenes look at the creative process of children's book illustration.">
+    <title>Process: Sketching the Backyard Jungle | [Author Name] Blog</title>
+    <link rel="icon" href="assets/images/author.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Shared anims */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .fade-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* SECTION 1: Parallax Hero */
+        .bd-hero {
+            position: relative;
+            height: 70vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bd-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/hero.png') center/cover;
+            animation: slowZoom 25s infinite alternate linear;
+            z-index: 0;
+        }
+
+        @keyframes slowZoom {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.15);
+            }
+        }
+
+        .bd-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--bg-paper) 0%, rgba(26, 26, 46, 0.6) 100%);
+            z-index: 1;
+        }
+
+        .bd-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+            color: white;
+            margin-top: 4rem;
+        }
+
+        .bd-title {
+            font-size: 4rem;
+            line-height: 1.2;
+            margin: 1.5rem 0;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: dropIn 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            color: #FFF;
+        }
+
+        @keyframes dropIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* SECTION 2: Article Body */
+        .bd-article {
+            background: var(--bg-paper);
+            padding: 4rem 0 8rem;
+        }
+
+        .bd-content {
+            max-width: 750px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-main);
+        }
+
+        .bd-quote {
+            position: relative;
+            padding: 3rem;
+            margin: 4rem 0;
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--primary);
+            transform: translateX(-50px);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+
+        .bd-quote.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .bd-quote::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 6rem;
+            color: var(--accent);
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        /* SECTION 3: Author Box */
+        .bd-author-section {
+            position: relative;
+            margin-top: -60px;
+            z-index: 10;
+            padding-bottom: 5rem;
+        }
+
+        .bd-author-card {
+            background: linear-gradient(135deg, var(--bg-white), var(--bg-light));
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: float-card 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes float-card {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .bd-author-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            position: relative;
+        }
+
+        .bd-author-img-wrap {
+            position: relative;
+        }
+
+        .bd-author-img-wrap::after {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border: 2px dashed var(--primary);
+            border-radius: 50%;
+            animation: spin-dashed 10s linear infinite;
+        }
+
+        @keyframes spin-dashed {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* SECTION 4: Read More Carousel/Grid */
+        .bd-more {
+            padding: 6rem 0;
+            background: var(--bg-white);
+            border-top: 1px solid var(--border);
+        }
+
+        .bd-more-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .bd-more-card {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            position: relative;
+            transform: perspective(1000px) rotateX(15deg) translateY(30px);
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+
+        .bd-more-card.active {
+            transform: perspective(1000px) rotateX(0deg) translateY(0);
+            opacity: 1;
+        }
+
+        .bd-more-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(108, 92, 231, 0.2);
+        }
+
+        .bd-more-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .bd-more-card:hover .bd-more-img {
+            transform: scale(1.05);
+        }
+
+        .bd-more-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 1.5rem 1.5rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            color: white;
+            transition: transform 0.4s ease;
+        }
+
+        @media (max-width: 900px) {
+            .bd-more-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bd-author-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .bd-title {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body data-theme="light">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-blob"></div>
+    </div>
+
+    <!-- Shared Header Placeholder -->
+    <nav class="navbar"></nav>
+
+    <!-- SECTION 1: Parallax Hero -->
+    <header class="bd-hero">
+        <div class="bd-hero-bg"></div>
+        <div class="bd-hero-overlay"></div>
+        <div class="bd-hero-content">
+            <div style="animation: dropIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;">
+                <span
+                    style="background: var(--accent); color: white; padding: 0.5rem 1.5rem; border-radius: 50px; font-weight: bold; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px;">Behind
+                    the Pages</span>
+            </div>
+            <h1 class="bd-title">How We Sketched the Backyard Jungle</h1>
+            <div
+                style="display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; align-items: center; color: rgba(255,255,255,0.8); animation: dropIn 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;">
+                <span><i class="ri-calendar-line"></i> May 20, 2024</span>
+                <span style="margin: 0 1rem; opacity: 0.5;">|</span>
+                <span><i class="ri-time-line"></i> 5 min read</span>
+                <span style="margin: 0 1rem; opacity: 0.5;">|</span>
+                <span><i class="ri-message-3-line"></i> 12 Comments</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 2: Dynamic Article Body -->
+    <section class="bd-article">
+        <div class="container bd-content">
+            <p class="fade-up reveal">The journey of every story begins not with a word, but with a feeling. When I
+                first started thinking about Leo's adventure, I knew it had to feel "at-home" yet "expansive". The
+                backyard was our anchor, but our imagination was the ocean.</p>
+
+            <p class="fade-up reveal">Kids experience the world through raw emotion and exaggerated scale. A simple rose
+                bush isn't just a plant; it's a towering forest. A puddle is a vast sea.</p>
+
+            <blockquote class="bd-quote reveal">
+                "The biggest jungles are often found in the smallest places. You just have to know how to look."
+            </blockquote>
+
+            <h2 class="fade-up reveal" style="font-size: 2.2rem; margin: 3rem 0 1.5rem; color: var(--primary);">The
+                First Drafts</h2>
+            <p class="fade-up reveal">Originally, the characters were far more realistic. Below is a sketch from the
+                very first sessions where we played with the idea of a botanical jungle. Eventually, we moved towards a
+                softer, more dreamlike style to match the age group's sensory experience.</p>
+
+            <img src="assets/images/hero.png" alt="Concept Art" class="fade-up reveal"
+                style="width: 100%; border-radius: var(--radius-lg); margin: 3rem 0; box-shadow: 0 15px 40px rgba(0,0,0,0.15);">
+
+            <h2 class="fade-up reveal" style="font-size: 2.2rem; margin: 3rem 0 1.5rem; color: var(--primary);">Lessons
+                in Color</h2>
+            <p class="fade-up reveal">What I learned through this process is that kids don't need things to be perfectly
+                rendered. They need things to feel true. If a leaf feels soft and alive, it doesn't matter if it's neon
+                purple. In fact, if it's neon purple, they might love it even more.</p>
+
+            <p class="fade-up reveal mb-5">In our next post, we'll talk about the rhythmic writing process and how to
+                read to your children with intent to create lasting nighttime memories.</p>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Floating Author Box -->
+    <section class="bd-author-section container reveal">
+        <div class="bd-author-card">
+            <div class="bd-author-img-wrap">
+                <img src="assets/images/author.png" alt="Eliza Joy" class="bd-author-img">
+            </div>
+            <div>
+                <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--primary);">Eliza Joy</h3>
+                <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">Author, illustrator, and
+                    professional daydreamer. Creating magical worlds for tiny minds to explore before bedtime.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#"
+                        style="background: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-main); box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: var(--transition);"><i
+                            class="ri-twitter-fill"></i></a>
+                    <a href="#"
+                        style="background: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-main); box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: var(--transition);"><i
+                            class="ri-instagram-line"></i></a>
+                    <a href="#"
+                        style="background: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-main); box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: var(--transition);"><i
+                            class="ri-facebook-circle-fill"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: 3D Next Read Cards -->
+    <section class="bd-more">
+        <div class="container">
+            <h2 class="text-center mb-5 reveal" style="font-size: 2.5rem;">Continue the Journey</h2>
+            <div class="bd-more-grid">
+                <a href="#" class="bd-more-card reveal" style="transition-delay: 0.1s;">
+                    <img src="assets/images/book-2.png" alt="Read 1" class="bd-more-img">
+                    <div class="bd-more-info">
+                        <span
+                            style="color: var(--accent); font-size: 0.8rem; text-transform: uppercase; font-weight: bold;">Tips
+                            & Tricks</span>
+                        <h3 style="color: white; font-size: 1.2rem; margin-top: 0.5rem; margin-bottom: 0;">How to Read
+                            with Voices</h3>
+                    </div>
+                </a>
+                <a href="#" class="bd-more-card reveal" style="transition-delay: 0.3s;">
+                    <img src="assets/images/book-3.png" alt="Read 2" class="bd-more-img">
+                    <div class="bd-more-info">
+                        <span
+                            style="color: var(--accent); font-size: 0.8rem; text-transform: uppercase; font-weight: bold;">Behind
+                            the Scenes</span>
+                        <h3 style="color: white; font-size: 1.2rem; margin-top: 0.5rem; margin-bottom: 0;">Designing the
+                            Little Explorer</h3>
+                    </div>
+                </a>
+                <a href="#" class="bd-more-card reveal" style="transition-delay: 0.5s;">
+                    <img src="assets/images/book-1.png" alt="Read 3" class="bd-more-img">
+                    <div class="bd-more-info">
+                        <span
+                            style="color: var(--accent); font-size: 0.8rem; text-transform: uppercase; font-weight: bold;">Events</span>
+                        <h3 style="color: white; font-size: 1.2rem; margin-top: 0.5rem; margin-bottom: 0;">May Library
+                            Recap</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shared Footer Placeholder -->
+    <footer></footer>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
