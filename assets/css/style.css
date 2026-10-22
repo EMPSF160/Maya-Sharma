@@ -3114,10 +3114,58 @@ body.portfolio-body {
     padding: 0;
 }
 
-[data-theme="dark"] body.portfolio-body {
+[data-theme="dark"] body.portfolio-body,
+body.portfolio-body[data-theme="dark"] {
     background-color: #0F172A !important;
     background-image: none !important;
     color: #F1F5F9;
+}
+
+/* Ribbon Banner Toggle Buttons (Light and Dark) */
+.top-pattern-banner .theme-toggle,
+.top-pattern-banner .palette-toggle {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    color: #333232;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    padding: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.top-pattern-banner .theme-toggle:hover,
+.top-pattern-banner .palette-toggle:hover {
+    background: #FFFFFF;
+    color: #000;
+    transform: scale(1.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .top-pattern-banner {
+    background-color: #162032;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .top-pattern-banner .theme-toggle,
+[data-theme="dark"] .top-pattern-banner .palette-toggle {
+    background: rgba(30, 41, 59, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #EBBF50;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .top-pattern-banner .theme-toggle:hover,
+[data-theme="dark"] .top-pattern-banner .palette-toggle:hover {
+    background: #EBBF50;
+    color: #0F172A;
+    box-shadow: 0 0 14px rgba(235, 191, 80, 0.45);
 }
 
 /* Top Decorative Confetti/Sprinkle Ribbon (Exact to Screenshot) */
@@ -3566,6 +3614,48 @@ body.portfolio-body {
     .portfolio-gallery-thumb {
         height: 260px;
     }
+}
+
+/* Dark Mode Enhancements for Views on Portfolio Page */
+[data-theme="dark"] #aboutView > div,
+[data-theme="dark"] #contactView > div {
+    background: #1E293B !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #F1F5F9 !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35) !important;
+}
+
+[data-theme="dark"] #aboutView h2,
+[data-theme="dark"] #contactView h2 {
+    color: #F1F5F9 !important;
+}
+
+[data-theme="dark"] #aboutView div,
+[data-theme="dark"] #aboutView p {
+    color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] #contactView label {
+    color: #E2E8F0 !important;
+}
+
+[data-theme="dark"] #portfolioContactForm input,
+[data-theme="dark"] #portfolioContactForm textarea {
+    background: #0F172A !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #F1F5F9 !important;
+}
+
+[data-theme="dark"] #portfolioContactForm input:focus,
+[data-theme="dark"] #portfolioContactForm textarea:focus {
+    border-color: #EBBF50 !important;
+    box-shadow: 0 0 0 3px rgba(235, 191, 80, 0.2) !important;
+}
+
+[data-theme="dark"] #portfolioContactForm .nav-pill {
+    background: #EBBF50 !important;
+    color: #0F172A !important;
+    font-weight: 600;
 }
 
 /* ==========================================================================

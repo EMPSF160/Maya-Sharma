@@ -33,6 +33,16 @@
       "description": "Children's Book Author and Illustrator based in India creating warm, rich, vibrant picture books and character designs in Procreate."
     }
     </script>
+
+    <!-- Immediate Theme & Palette Initialization to prevent flash of unstyled theme -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            const savedPalette = localStorage.getItem('site-palette') || 'nature';
+            document.documentElement.setAttribute('data-palette', savedPalette);
+        })();
+    </script>
 </head>
 
 <body class="portfolio-body">
@@ -55,7 +65,7 @@
             <div class="banner-inner">
                 <!-- Discreet Theme & Palette Controls -->
                 <div class="palette-picker-container">
-                    <button class="palette-toggle" id="portfolioPaletteBtn" aria-label="Toggle Color Palettes" title="Choose Theme Palette" style="width: 28px; height: 28px; font-size: 0.9rem; background: rgba(255, 255, 255, 0.85); border-color: rgba(0,0,0,0.1);">
+                    <button class="palette-toggle" id="portfolioPaletteBtn" aria-label="Toggle Color Palettes" title="Choose Theme Palette">
                         <i class="ri-palette-line"></i>
                     </button>
                     <div class="palette-dropdown" id="portfolioPaletteDropdown" role="dialog" aria-label="Color Options" style="top: calc(100% + 8px);">
@@ -115,7 +125,7 @@
                     </div>
                 </div>
 
-                <button class="theme-toggle" id="portfolioThemeBtn" aria-label="Toggle Dark/Light Mode" title="Toggle Dark/Light Mode" style="width: 28px; height: 28px; font-size: 0.9rem; background: rgba(255, 255, 255, 0.85); border-color: rgba(0,0,0,0.1);">
+                <button class="theme-toggle" id="portfolioThemeBtn" aria-label="Toggle Dark/Light Mode" title="Toggle Dark/Light Mode">
                     <i class="ri-moon-line"></i>
                 </button>
             </div>
@@ -1227,30 +1237,27 @@
                 }
             });
 
-            // 4. Portfolio Discreet Theme Toggle in Ribbon
-            const portThemeBtn = document.getElementById('portfolioThemeBtn');
-            if (portThemeBtn) {
-                portThemeBtn.addEventListener('click', () => {
-                    const cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-                    document.documentElement.setAttribute('data-theme', cur);
-                    document.body.setAttribute('data-theme', cur);
-                    localStorage.setItem('theme', cur);
-                    const icon = portThemeBtn.querySelector('i');
-                    if (icon) icon.className = cur === 'dark' ? 'ri-sun-line' : 'ri-moon-line';
-                });
-            }
-
-            // 5. Portfolio Discreet Palette Dropdown in Ribbon
+            // 4. Portfolio Discreet Palette Dropdown in Ribbon
             const portPalBtn = document.getElementById('portfolioPaletteBtn');
             const portPalDropdown = document.getElementById('portfolioPaletteDropdown');
             if (portPalBtn && portPalDropdown) {
+                // Initialize active palette indicator
+                const currentPal = localStorage.getItem('site-palette') || 'nature';
+                portPalDropdown.querySelectorAll('.palette-option').forEach(o => {
+                    if (o.getAttribute('data-palette-choice') === currentPal) {
+                        o.classList.add('active');
+                    } else {
+                        o.classList.remove('active');
+                    }
+                });
+
                 portPalBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     portPalDropdown.classList.toggle('active');
                 });
 
                 document.addEventListener('click', (e) => {
-                    if (!portPalDropdown.contains(e.target) && e.target !== portPalBtn) {
+                    if (!portPalDropdown.contains(e.target) && !e.target.closest('#portfolioPaletteBtn')) {
                         portPalDropdown.classList.remove('active');
                     }
                 });

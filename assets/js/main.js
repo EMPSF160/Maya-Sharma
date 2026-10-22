@@ -321,31 +321,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 3. Theme & RTL Toggles
-    const themeToggles = document.querySelectorAll('.theme-toggle');
     const rtlToggles = document.querySelectorAll('.rtl-toggle');
     const body = document.body;
     const html = document.documentElement;
 
-    updateThemeIcons(localStorage.getItem('theme') || 'light');
-
-    themeToggles.forEach(toggle => {
-        toggle.addEventListener('click', () => {
-            const currentTheme = (body.getAttribute('data-theme') === 'dark' || html.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
-            body.setAttribute('data-theme', currentTheme);
-            html.setAttribute('data-theme', currentTheme);
-            localStorage.setItem('theme', currentTheme);
-            updateThemeIcons(currentTheme);
-        });
-    });
+    function getActiveTheme() {
+        return html.getAttribute('data-theme') || body.getAttribute('data-theme') || localStorage.getItem('theme') || 'light';
+    }
 
     function updateThemeIcons(theme) {
-        themeToggles.forEach(toggle => {
+        const isDark = theme === 'dark';
+        document.querySelectorAll('.theme-toggle').forEach(toggle => {
             const icon = toggle.querySelector('i');
             if (icon) {
-                icon.className = theme === 'dark' ? 'ri-sun-line' : 'ri-moon-line';
+                icon.className = isDark ? 'ri-sun-line' : 'ri-moon-line';
             }
+            const label = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+            toggle.setAttribute('aria-label', label);
+            toggle.setAttribute('title', label);
         });
     }
+
+    function applyTheme(theme) {
+        body.setAttribute('data-theme', theme);
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        updateThemeIcons(theme);
+    }
+
+    // Sync theme and all icons on load
+    applyTheme(getActiveTheme());
+
+    // Unified click handler with event delegation (handles all current and injected theme toggles)
+    document.addEventListener('click', (e) => {
+        const toggleBtn = e.target.closest('.theme-toggle');
+        if (toggleBtn) {
+            e.preventDefault();
+            const currentTheme = getActiveTheme();
+            const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(nextTheme);
+        }
+    });
 
     // 3b. Theme Palette Switcher
     const initPaletteSwitcher = () => {
